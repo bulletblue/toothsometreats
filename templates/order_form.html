@@ -1,0 +1,16 @@
+{% extends "master.html" %}
+{% block body %}
+ 	<h2>Order Form</h2>
+  {% if error %}<p class=error>{{ error }}{% endif %}
+  <h3>This is the Order Form Page</h3>
+    	<form action="{{ url_for('order_form') }}" method=post>
+    		<dl>
+      			<dt>Email:
+      			<dd><input type=text name=email>
+      			<dt>Body:
+      			<dd><input type=text name=body>
+      			<dd><input type=submit value=Submit>
+    		</dl>
+  		</form>
+{% endblock %}
+
