@@ -15,18 +15,6 @@ def about():
 
 @app.route('/order_form')
 def order_form():
-#	error = None
-#	if request.method == 'POST':
-#		if request.form['name'] == '':
-#			error = 'Please enter your name'
-#		elif not re.match('[\w.]*@[\w]*.[\w]*',request.form['email']):
-#			error = 'Invalid Email Address'
-#		elif request.form['body'] == '':
-#			error = 'Please enter details'
-#		else:
-#			mail.send(request.form['name'], request.form['email'], request.form['body'])
-#			flash('Sent!')
-#			return redirect(url_for('index'))
 	return render_template('order_form.html')
 
 @app.route('/photos')
@@ -46,15 +34,16 @@ def validate():
 	name = request.args.get('name', '', type=str)
 	email = request.args.get('email', '', type=str)
 	body = request.args.get('body', '', type=str)
-	return jsonify(error='test')
-#	
-#	if name == '' or email == '' or body == '':
-#		return jsonify(error='Please enter details below')
-#	elif not re.match('[\w.]*@[\w]*.[\w]*', email):
-#		return jsonify(error='Invalid email address')
-#	else:
-#		flash('Your request has been sent, thank you!')
-#		return redirect(url_for('index'))
+
+	if name == '' or email == '' or body == '':
+		return jsonify(err='Please enter all details below')
+	elif not re.match('[\w.]*@[\w]*.[\w]*', email):
+		return jsonify(err='Invalid email address')
+	else:
+		jsonify(err='PLEASE WAIT')
+		mail.send(name,email,body)
+		flash('Your request has been sent, thank you!')
+		return jsonify(err='')
 
 
 @app.route('/_add_numbers')
