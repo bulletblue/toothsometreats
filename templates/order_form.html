@@ -1,16 +1,30 @@
 {% extends "master.html" %}
 {% block body %}
+<script type=text/javascript>
+  $(function() {
+    $('a#submit').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/_validate', {
+        name: $('input[name="name"]').val(),
+        email: $('input[name="email"]').val(),
+        body: $('input[name="body"]').val()
+      }, function(data) {
+        $("#error").text(data.result);
+      });
+      return false;
+    });
+  });
+</script>
  	<h2>Order Form</h2>
-  {% if error %}<p class=error>{{ error }}{% endif %}
+  <span id="error">error</span>
   <h3>This is the Order Form Page</h3>
-    	<form action="{{ url_for('order_form') }}" method=post>
-    		<dl>
-      			<dt>Email:
-      			<dd><input type=text name=email>
-      			<dt>Body:
-      			<dd><input type=text name=body>
-      			<dd><input type=submit value=Submit>
-    		</dl>
-  		</form>
+	<dl>
+      <dt>Name:
+      <dd><input type=text name=name>
+			<dt>Email:
+			<dd><input type=text name=email>
+			<dt>Order Details:
+			<dd><input type=text name=body>
+			<dd><a href=# id="submit">Submit</a>
+	</dl>
 {% endblock %}
 

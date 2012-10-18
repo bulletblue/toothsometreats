@@ -1,6 +1,8 @@
 <!doctype html>
 <title>Judy's Toothsome Treats</title>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<script type=text/javascript src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type=text/javascript> var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; </script>
 <div class=page>
 	<h1>Toothsome Treats</h1>
 	<div class=navlinks>
@@ -9,6 +11,7 @@
 		<a href="{{ url_for('order_form') }}">Order Form</a>
 		<a href="{{ url_for('photos') }}">Photos</a>
 		<a href="{{ url_for('blog') }}">Blog</a>
+		<a href="{{ url_for('test') }}">Test</a>
 	</div>
 	{% for message in get_flashed_messages() %}
 		<div class=flash>{{ message }}</div>
