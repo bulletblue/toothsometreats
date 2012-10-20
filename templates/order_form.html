@@ -3,19 +3,26 @@
 <script type=text/javascript>
   $(document).ready(function() {
     $('#send').bind('click', function() {
+      $('#wait').text('Please wait...')
       $.getJSON($SCRIPT_ROOT + '/_validate', {
         name: $('input[name="name"]').val(),
         email: $('input[name="email"]').val(),
         body: $('input[name="body"]').val()
       }, function(data) {
-        $('#err').text(data.err);
+        if (data.err != 'NONE') {
+          $('#wait').text('')
+          $('#err').text(data.err);
+        }
+        else {
+          window.location.replace($SCRIPT_ROOT + '/')
+        }
       });
       return false;
     });
   });
 </script>
  	<h2>Order Form</h2>
-  <p><span id="err">error</span>
+  <p><span id="err"></span>
   <h3>This is the Order Form Page</h3>
 	<dl>
       <dt>Name:
@@ -24,7 +31,7 @@
 			<dd><input type=text name=email>
 			<dt>Order Details:
 			<dd><input type=text name=body>
-			<dd><a href=# id="send">Send</a>
+			<dd><a href=# id="send">Send</a><span id="wait"></span>
 	</dl>
 {% endblock %}
 

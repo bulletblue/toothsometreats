@@ -40,10 +40,9 @@ def validate():
 	elif not re.match('[\w.]*@[\w]*.[\w]*', email):
 		return jsonify(err='Invalid email address')
 	else:
-		jsonify(err='PLEASE WAIT')
 		mail.send(name,email,body)
 		flash('Your request has been sent, thank you!')
-		return jsonify(err='')
+		return jsonify(err='NONE')
 
 
 @app.route('/_add_numbers')
