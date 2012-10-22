@@ -1,1 +1,3 @@
 Toothsome Treats Project
+
+rename CONFIG_TEMPLATE.INI to CONFIG.INI and add required fields prior to deploy
