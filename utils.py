@@ -8,8 +8,8 @@ import os
 class Mail:
 
 	def __init__(self):
-		self.gmail_user = 'bulletblue@gmail.com'
-		self.gmail_pwd = 'mother86'
+		self.gmail_user = ''
+		self.gmail_pwd = ''
 
 	def send(self, name, sender, body):
 	   msg = MIMEMultipart()
