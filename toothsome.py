@@ -11,6 +11,7 @@ def index():
 
 @app.route('/about')
 def about():
+	print DATABASE
 	return render_template('about.html')
 
 @app.route('/order_form')

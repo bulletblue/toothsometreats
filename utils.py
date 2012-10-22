@@ -4,12 +4,16 @@ from email.MIMEBase import MIMEBase
 from email.MIMEText import MIMEText
 from email import Encoders
 import os
+import ConfigParser
+
+config = ConfigParser.ConfigParser()
+config.read('CONFIG.INI')
 
 class Mail:
 
 	def __init__(self):
-		self.gmail_user = ''
-		self.gmail_pwd = ''
+		self.gmail_user = config.get('SMTP', 'USER')
+		self.gmail_pwd = config.get('SMTP', 'PASS')
 
 	def send(self, name, sender, body):
 	   msg = MIMEMultipart()
@@ -20,7 +24,7 @@ class Mail:
 
 	   msg.attach(MIMEText(body + '\n\n Reply: ' + sender))
 	   
-	   mailServer = smtplib.SMTP("smtp.gmail.com", 587)
+	   mailServer = smtplib.SMTP(config.get('SMTP', 'SERVER'), config.get('SMTP','PORT'))
 	   mailServer.ehlo()
 	   mailServer.starttls()
 	   mailServer.ehlo()
